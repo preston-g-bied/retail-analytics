@@ -1,0 +1,102 @@
+# Python specific
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.env
+
+# Data files
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/*/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+!data/processed/*/.gitkeep
+data/simulated/*
+!data/simulated/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+*.csv
+*.json
+*.xlsx
+*.parquet
+*.pkl
+*.h5
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+.vs/
+
+# Documentation builds
+docs/_build/
+site/
+
+# Logs
+*.log
+logs/
+lightning_logs/
+
+# Credentials and secrets
+.env
+credentials.json
+*.pem
+config/*.yaml
+!config/default.yaml
+!config/example.yaml
+
+# Model artifacts
+models/
+*.pt
+*.pth
+*.h5
+*.pkl
+*.joblib
+mlruns/
+
+# Temporary files
+tmp/
+temp/
+
+# Docker
+.docker/
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Application specific
+node_modules/
+
+# Pending
+PENDING.md
