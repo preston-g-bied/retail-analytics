@@ -8,13 +8,13 @@ db.createCollection('products', {
     validator: {
         $jsonSchema: {
             bsonType: 'object',
-            required: ['product_key', 'name', 'created_at'],
+            required: ['product_key', 'product_name', 'created_at'],
             properties: {
                 product_key: {
                     bsonType: 'string',
                     description: 'Natural key from source system'
                 },
-                name: {
+                product_name: {
                     bsonType: 'string',
                     description: 'Product name'
                 },
