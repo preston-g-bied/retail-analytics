@@ -123,7 +123,7 @@ def get_mongodb_client():
         # connect to MongoDB
         client = pymongo.MongoClient(
             host=mongo_config["host"],
-            port=mongo_config["port"],
+            port=int(mongo_config["port"]),
             username=mongo_config["user"],
             password=mongo_config["password"]
         )
