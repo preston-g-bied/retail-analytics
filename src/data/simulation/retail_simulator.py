@@ -111,6 +111,8 @@ class RetailSimulator(BaseSimulator):
         end_date = datetime.strptime(self.config['time_range']['end'], "%Y-%m-%d")
 
         customers = []
+        used_emails = set()
+
         for i in range(self.config['num_customers']):
             is_active = random.random() > self.config['customer_params']['inactive_probability']
             created_date = self.faker.date_time_between(
@@ -118,12 +120,18 @@ class RetailSimulator(BaseSimulator):
                 end_date=end_date
             )
 
+            # generate a unique email
+            email = self.faker.email()
+            while email in used_emails:
+                email = self.faker.email()
+            used_emails.add(email)
+
             customer = {
                 'customer_id': i + 1,
                 'customer_key': str(uuid.uuid4()),
                 'first_name': self.faker.first_name(),
                 'last_name': self.faker.last_name(),
-                'email': self.faker.email(),
+                'email': email,
                 'phone': self.faker.phone_number(),
                 'created_at': created_date,
                 'updated_at': self.faker.date_time_between(
