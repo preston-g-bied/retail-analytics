@@ -125,7 +125,7 @@ def get_mongodb_client():
             host=mongo_config["host"],
             port=mongo_config["port"],
             username=mongo_config["user"],
-            passowrd=mongo_config["password"]
+            password=mongo_config["password"]
         )
 
         # test connection
