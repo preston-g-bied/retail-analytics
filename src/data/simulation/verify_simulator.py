@@ -541,7 +541,7 @@ def main():
             logger.error(f"Error: {verification_results['error']}")
 
     # save results
-    with open(args.result_file, 'w') as f:
+    with open(args.results_file, 'w') as f:
         json.dump(verification_results, f, indent=2)
 
     logger.info(f"Verification results saved to {args.results_file}")
