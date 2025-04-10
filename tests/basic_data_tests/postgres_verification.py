@@ -1,4 +1,4 @@
-# tests/postgres_verification.py
+# tests/basic_data_tests/postgres_verification.py
 
 from src.data.database import PostgresConnection, get_postgres_cursor
 

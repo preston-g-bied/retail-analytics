@@ -1,4 +1,4 @@
-# tests/kaggle_connector_test.py
+# tests/basic_data_tests/kaggle_connector_test.py
 
 from src.data.connectors.factory import ConnectorFactory
 

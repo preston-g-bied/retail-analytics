@@ -1,4 +1,4 @@
-# tests/mongodb_verification.py
+# tests/basic_data_tests/mongodb_verification.py
 
 from src.data.database import MongoDBConnection
 

@@ -89,6 +89,7 @@ temp/
 
 # Docker
 .docker/
+docker-compose.yml
 
 # Testing
 .coverage
