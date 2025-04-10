@@ -114,7 +114,7 @@ CREATE TABLE staging.stg_customer (
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     email VARCHAR(255),
-    phone VARCHAR(20),
+    phone VARCHAR(50),
     address_line1 VARCHAR(255),
     address_line2 VARCHAR(255),
     city VARCHAR(100),
