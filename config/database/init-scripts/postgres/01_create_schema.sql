@@ -10,13 +10,13 @@ CREATE SCHEMA IF NOT EXISTS staging;
 -- dimension tables
 CREATE TABLE retail.dim_customer (
     customer_id SERIAL PRIMARY KEY,
-    customer_key VARCHAR(50), UNIQUE NOT NULL,  -- natural key from source system
+    customer_key VARCHAR(50) UNIQUE NOT NULL,  -- natural key from source system
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     email VARCHAR(255) UNIQUE,
     phone VARCHAR(20),
     created_at TIMESTAMP NOT NULL,
-    updated at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
     is_active BOOLEAN DEFAULT TRUE
 );
 
@@ -185,15 +185,15 @@ CREATE USER app_user WITH PASSWORD 'app_password';
 
 -- grant permissions to ETL user
 GRANT USAGE ON SCHEMA retail TO etl_user;
-GRANT USAGE ON SCHEMA stanging TO etl_user;
+GRANT USAGE ON SCHEMA staging TO etl_user;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA staging TO etl_user;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA staging TO etl_user;
 GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA retail TO etl_user;
-GRANT USAGE ON ALL SEQUENCES IN SCHEMA retaul TO etl_user
+GRANT USAGE ON ALL SEQUENCES IN SCHEMA retail TO etl_user;
 
 -- grant permissions to analytics user
 GRANT USAGE ON SCHEMA retail TO analytics_user;
-GRANT SELECT ALL TABLES IN SCHEMA retail TO analytics_user;
+GRANT SELECT ON ALL TABLES IN SCHEMA retail TO analytics_user;
 
 -- grant permissions to app user
 GRANT USAGE ON SCHEMA retail TO app_user;
@@ -241,7 +241,7 @@ BEGIN
             TO_CHAR(curr_date, 'Month'),
             EXTRACT(QUARTER FROM curr_date),
             EXTRACT(YEAR FROM curr_date),
-            CASE WHEN EXTRACR(DOW FROM curr_date) IN (0, 6) THEN TRUE ELSE FALSE END,
+            CASE WHEN EXTRACT(DOW FROM curr_date) IN (0, 6) THEN TRUE ELSE FALSE END,
             FALSE,  -- default is_holiday to FALSE; update specific holidays later
             NULL
         );
@@ -249,7 +249,7 @@ BEGIN
         curr_date := curr_date + 1;
     END LOOP;
 END;
-$$ LANGUAGE plpqsql;
+$$ LANGUAGE plpgsql;
 
 -- populate date dimension for 3 years (adjust as needed)
 SELECT populate_dim_date('2023-01-01', '2025-12-31');

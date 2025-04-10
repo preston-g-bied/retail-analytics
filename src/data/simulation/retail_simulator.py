@@ -105,14 +105,17 @@ class RetailSimulator(BaseSimulator):
         Returns:
             DataFrame with customer data
         """
-        logger.info(f"Generating {self.config['num_custimers']} customers")
+        logger.info(f"Generating {self.config['num_customers']} customers")
+
+        start_date = datetime.strptime(self.config['time_range']['start'], "%Y-%m-%d")
+        end_date = datetime.strptime(self.config['time_range']['end'], "%Y-%m-%d")
 
         customers = []
         for i in range(self.config['num_customers']):
             is_active = random.random() > self.config['customer_params']['inactive_probability']
             created_date = self.faker.date_time_between(
-                start_date=self.config['time_range']['start'],
-                end_date=self.config['time_range']['end']
+                start_date=start_date,
+                end_date=end_date
             )
 
             customer = {
@@ -125,7 +128,7 @@ class RetailSimulator(BaseSimulator):
                 'created_at': created_date,
                 'updated_at': self.faker.date_time_between(
                     start_date=created_date,
-                    end_date=self.config['time_range']['end']
+                    end_date=end_date
                 ),
                 'is_active': is_active
             }
@@ -141,6 +144,9 @@ class RetailSimulator(BaseSimulator):
             DataFrame with product data
         """
         logger.info(f"Generating {self.config['num_products']} products")
+
+        start_date = datetime.strptime(self.config['time_range']['start'], "%Y-%m-%d")
+        end_date = datetime.strptime(self.config['time_range']['end'], "%Y-%m-%d")
 
         # generate categories
         categories = []
@@ -159,8 +165,8 @@ class RetailSimulator(BaseSimulator):
         for i in range(self.config['num_products']):
             is_active = random.random() > self.config['product_params']['discontinued_probability']
             created_date = self.faker.date_time_between(
-                start_date=self.config['time_range']['start'],
-                end_date=self.config['time_range']['end']
+                start_date=start_date,
+                end_date=end_date,
             )
 
             # randomly select category and subcategory
@@ -190,7 +196,7 @@ class RetailSimulator(BaseSimulator):
                 'created_at': created_date,
                 'updated_at': self.faker.date_time_between(
                     start_date=created_date,
-                    end_date=self.config['time_range']['end']
+                    end_date=end_date
                 ),
                 'is_active': is_active
             }
@@ -207,12 +213,15 @@ class RetailSimulator(BaseSimulator):
         """
         logger.info(f"Generating {self.config['num_locations']} locations")
 
+        start_date = datetime.strptime(self.config['time_range']['start'], "%Y-%m-%d")
+        end_date = datetime.strptime(self.config['time_range']['end'], "%Y-%m-%d")
+
         locations = []
         for i in range(self.config['num_locations']):
             country = self.faker.country()
             created_date = self.faker.date_time_between(
-                start_date=self.config['time_range']['start'],
-                end_date=self.config['time_range']['end']
+                start_date=start_date,
+                end_date=end_date
             )
 
             location = {
@@ -225,12 +234,12 @@ class RetailSimulator(BaseSimulator):
                 'created_at': created_date,
                 'updated_at': self.faker.date_time_between(
                     start_date=created_date,
-                    end_date=self.config['time_range']['end']
+                    end_date=end_date
                 )
             }
             locations.append(location)
 
-        return pd.DataFrame(location)
+        return pd.DataFrame(locations)
     
     def _generate_transactions(self) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """

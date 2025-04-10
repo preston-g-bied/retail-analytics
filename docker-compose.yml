@@ -5,8 +5,8 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: retail_user
-      POSTGRES_PASSWORD: retail_password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: retail_analytics
     volumes:
       - postgres_data:/var/lib/postgresql/data
