@@ -95,6 +95,7 @@ docker-compose.yml
 .coverage
 htmlcov/
 .pytest_cache/
+tests/results/*
 
 # Application specific
 node_modules/
