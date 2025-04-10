@@ -53,7 +53,7 @@ class DatabaseTester:
         logger.info("Testing PostgreSQL connection...")
         start_time = time.time()
         try:
-            with PostgresConnection as conn:
+            with PostgresConnection() as conn:
                 cursor = get_postgres_cursor(conn)
 
                 # test query
@@ -143,7 +143,7 @@ class DatabaseTester:
         start_time = time.time()
 
         try:
-            with MongoDBConnection as db:
+            with MongoDBConnection() as db:
                 # test command
                 status = db.command("serverStatus")
 
